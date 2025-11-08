@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💰 Khemmi farm 💰</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Kanit', sans-serif;
+    margin: 0;
+    transition: 0.3s;
+  }
+
+  header {
+    text-align: center;
+    padding: 25px 10px;
+    font-size: 22px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .theme-selector {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+  }
+
+  .calculator {
+    max-width: 480px;
+    margin: 30px auto;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 2px solid;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+
+  button {
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #result {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 1.8;
+  }
+
+  footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  /* -------- 🌾 HAYDAY THEME -------- */
+  body.hayday {
+    background: linear-gradient(to bottom, #f9f7ec, #f3e6c9);
+    color: #4b3f2f;
+  }
+  body.hayday header {
+    background: linear-gradient(to bottom, #fcd34d, #fbbf24);
+    color: #4b3f2f;
+    border-bottom: 6px solid #b45309;
+  }
+  body.hayday .calculator {
+    background: #fff8e1;
+    border: 5px solid #d6a34c;
+  }
+  body.hayday input {
+    border-color: #d6a34c;
+    background: #fffdf7;
+  }
+  body.hayday button {
+    background: #82c91e;
+    color: #fff;
+    box-shadow: 0 4px 0 #5f8d13;
+  }
+  body.hayday button:hover {
+    background: #74b816;
+    transform: translateY(-2px);
+  }
+  body.hayday #result {
+    background: #fffbea;
+    border-left: 6px solid #facc15;
+  }
+
+  /* -------- 💎 MODERN THEME -------- */
+  body.modern {
+    background: linear-gradient(to right, #e0e7ff, #f8fafc);
+    color: #1e293b;
+  }
+  body.modern header {
+    background: linear-gradient(to right, #2563eb, #3b82f6);
+    color: #fff;
+  }
+  body.modern .calculator {
+    background: #ffffff;
+    border: 3px solid #93c5fd;
+  }
+  body.modern input {
+    border-color: #93c5fd;
+  }
+  body.modern button {
+    background: #2563eb;
+    color: white;
+    box-shadow: 0 4px 0 #1d4ed8;
+  }
+  body.modern button:hover {
+    background: #1d4ed8;
+  }
+  body.modern #result {
+    background: #f0f9ff;
+    border-left: 6px solid #3b82f6;
+  }
+
+  /* -------- 🌙 DARK THEME (ค่าเริ่มต้น) -------- */
+  body.dark {
+    background: linear-gradient(to bottom, #1e1e2f, #111);
+    color: #f3f4f6;
+  }
+  body.dark header {
+    background: linear-gradient(to right, #0f172a, #1e293b);
+    color: #facc15;
+  }
+  body.dark .calculator {
+    background: #1e293b;
+    border: 3px solid #475569;
+  }
+  body.dark input {
+    border-color: #64748b;
+    background: #334155;
+    color: #fff;
+  }
+  body.dark button {
+    background: #facc15;
+    color: #1e1e2f;
+    font-weight: bold;
+  }
+  body.dark button:hover {
+    background: #eab308;
+  }
+  body.dark #result {
+    background: #334155;
+    border-left: 6px solid #facc15;
+  }
+</style>
+</head>
+<body class="dark">
+
+<header>💰 Khemmi farm 💰</header>
+
+<div class="theme-selector">
+  <label>🎨 เปลี่ยนธีม:</label>
+  <select id="themeSelect" onchange="changeTheme()">
+    <option value="dark" selected>🌙 Dark</option>
+    <option value="hayday">🌾 Hay Day</option>
+    <option value="modern">💎 Modern</option>
+  </select>
+</div>
+
+<div class="calculator">
+  <label>🐔 เลเวลของคุณ:</label>
+  <input type="number" id="levelInput" placeholder="กรอกเลเวลของคุณ">
+
+  <label>💰 จำนวนเงินที่ต้องการ (บาท):</label>
+  <input type="number" id="moneyInput" placeholder="กรอกจำนวนเงินที่ต้องการ">
+
+  <button onclick="calculate()">🚜 คำนวณรายได้</button>
+
+  <div id="result"></div>
+</div>
+
+<footer>
+  สร้างเพื่อเหล่าเกษตรกร Hay Day ทุกคน 🌾 | by ChatGPT
+</footer>
+
+<script>
+const items = [
+  {lv: 18, name: "เบคอนไข่", price10: 2016},
+  {lv: 19, name: "เสื้อผ้าฝ้าย", price10: 2412},
+  {lv: 21, name: "กางเกงขนปุย", price10: 3096},
+  {lv: 25, name: "ชุดเดรสสีม่วง", price10: 3286},
+  {lv: 31, name: "เค้กบลูเบอร์รี่", price10: 5004},
+  {lv: 38, name: "สร้อยข้อมือ", price10: 5148},
+  {lv: 39, name: "สร้อยคอ", price10: 7232},
+  {lv: 40, name: "แหวนเพชร", price10: 8244},
+  {lv: 59, name: "ผ้าห่ม", price10: 10980},
+];
+
+function calculate() {
+  const level = parseInt(document.getElementById("levelInput").value);
+  const target = parseInt(document.getElementById("moneyInput").value);
+  const resultDiv = document.getElementById("result");
+
+  if (isNaN(level) || isNaN(target)) {
+    resultDiv.innerHTML = "<p style='color:#f87171;'>❌ กรุณากรอกตัวเลขให้ถูกต้อง</p>";
+    return;
+  }
+
+  const usableItems = items.filter(item => item.lv <= level);
+  if (usableItems.length === 0) {
+    resultDiv.innerHTML = "<p style='color:#f87171;'>🐣 ยังไม่มีไอเทมที่ขายได้ในเลเวลนี้!</p>";
+    return;
+  }
+
+  const item = usableItems[usableItems.length - 1];
+  const pricePerItem = item.price10 / 10;
+  const incomePerRound = pricePerItem * 100;
+  const rounds = Math.ceil(target / incomePerRound);
+  const totalIncome = incomePerRound * rounds;
+
+  resultDiv.innerHTML = `
+    <strong>📊 ผลการคำนวณ</strong><br>
+    🌱 เลเวลของคุณ: <b>${level}</b><br>
+    🧺 ไอเทมที่ใช้: <b>${item.name}</b> (Lv${item.lv})<br>
+    💵 ราคาต่อ 10 ชิ้น: ${item.price10.toLocaleString()} บาท<br>
+    💰 รายได้ต่อรอบ (100 ชิ้น): <b>${incomePerRound.toLocaleString()}</b> บาท<br>
+    🎯 เป้าหมายเงิน: ${target.toLocaleString()} บาท<br>
+    🐮 ต้องขายทั้งหมด: <b>${rounds}</b> รอบ<br>
+    🌾 รายได้รวมจริง: <b>${totalIncome.toLocaleString()}</b> บาท
+  `;
+}
+
+// 🌈 เปลี่ยนธีม
+function changeTheme() {
+  const theme = document.getElementById("themeSelect").value;
+  document.body.className = theme;
+}
+
+// ⌨️ Enter key ทำงานได้
+document.addEventListener("keydown", e => {
+  if (e.key === "Enter") calculate();
+});
+</script>
+
+</body>
+</html>
